@@ -20,12 +20,15 @@ export default class {
 
     private parseRawEnv(rawEnv: string) {
         const lines = rawEnv.split(`\n`)
-        const uncommentedLines = lines?.filter(line => !line.startsWith('#'))
+        const uncommentedLines = lines?.filter(line => !line.startsWith('#') && line.trim().length > 0)
 
         const env = uncommentedLines?.reduce((accum, line) => {
             const equalsIndex = line.indexOf('=')
             const key = line.substring(0, equalsIndex)
             const value = line.substring(equalsIndex + 1)
+            if (!key) {
+                return accum;
+            }
 
             return { ...accum, [key]: value }
         }, { })
@@ -35,15 +38,20 @@ export default class {
 
     private updateRawEnv(rawEnv: string, env: KeyValue) {
         const lines = rawEnv.split(`\n`)
+        
         const updatedLines = lines.map((line) => {
-            if(line.startsWith ('#')) {
+            if(line.startsWith ('#') || line.trim().length === 0) {
                 return line
             }
             const equalsIndex = line.indexOf('=')
             const key = line.substring(0, equalsIndex)
+
+            if(key.trim().length === 0) {
+                return line;
+            }
             
             if(env[key] === null) {
-                return null;
+                return null
             }
 
             if(env[key] === undefined) {
