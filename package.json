@@ -2,7 +2,7 @@
   "name": "env_file_editor",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "dependencies": {
     "dotenv": "^9.0.2",
     "minimist": "^1.2.5"
