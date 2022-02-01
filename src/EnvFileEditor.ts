@@ -68,7 +68,11 @@ export default class {
     }
 
     async load() {
-        this.rawEnv = await getFile(this.filePath)
+        try {
+            this.rawEnv = await getFile(this.filePath)
+        } catch(e) {
+            this.rawEnv = ''
+        }
         this.env = this.parseRawEnv(this.rawEnv || '')
         this.envKeys = Object.keys(this.env)
         this.loaded = true
