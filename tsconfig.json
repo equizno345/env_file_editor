@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-      "outDir": "build",
+      "outDir": "dist",
       "target": "es6",
       "lib": [
           "es6"
@@ -26,5 +26,5 @@
   "files": [
       "index.ts"
   ],
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "dist"]
 }
